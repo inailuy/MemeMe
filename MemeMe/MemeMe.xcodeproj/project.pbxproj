@@ -12,6 +12,7 @@
 		333B38081C7E08970057D6E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333B38061C7E08970057D6E9 /* Main.storyboard */; };
 		333B380A1C7E08970057D6E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333B38091C7E08970057D6E9 /* Assets.xcassets */; };
 		333B380D1C7E08970057D6E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333B380B1C7E08970057D6E9 /* LaunchScreen.storyboard */; };
+		33747D841C9BE94300B1B404 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33747D831C9BE94300B1B404 /* QuartzCore.framework */; };
 		3377CED41C7E16AD0090D533 /* ufonts.com_impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3377CED31C7E16AD0090D533 /* ufonts.com_impact.ttf */; };
 		3377CED61C7E17170090D533 /* ufonts.com_impact.eot in Resources */ = {isa = PBXBuildFile; fileRef = 3377CED51C7E17170090D533 /* ufonts.com_impact.eot */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		333B38091C7E08970057D6E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333B380C1C7E08970057D6E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333B380E1C7E08970057D6E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33747D831C9BE94300B1B404 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3377CED31C7E16AD0090D533 /* ufonts.com_impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufonts.com_impact.ttf; sourceTree = "<group>"; };
 		3377CED51C7E17170090D533 /* ufonts.com_impact.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufonts.com_impact.eot; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33747D841C9BE94300B1B404 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +45,7 @@
 		333B37F61C7E08970057D6E9 = {
 			isa = PBXGroup;
 			children = (
+				33747D831C9BE94300B1B404 /* QuartzCore.framework */,
 				333B38011C7E08970057D6E9 /* MemeMe */,
 				333B38001C7E08970057D6E9 /* Products */,
 			);
