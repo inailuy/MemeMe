@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditorVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var bottomTextfield: UITextField!
     @IBOutlet weak var topTextfield: UITextField!
@@ -17,63 +17,67 @@ class EditorVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     
     var imagePicker = UIImagePickerController()
     var bottomFrame: CGRect!
-    var isEditingBottomFrame :Bool!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         bottomFrame = bottomTextfield.frame
-        isEditingBottomFrame = false
-        
-        self.drawTextInRect(topTextfield)
-        self.drawTextInRect(bottomTextfield)
         
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             cameraButton.enabled = false
         }
+        
+        if selectedMeme != nil {
+            imageView.image = selectedMeme.originalImage
+            topTextfield.text = selectedMeme.topText
+            bottomTextfield.text = selectedMeme.bottomText
+        }
+        
+        drawTextInRect(topTextfield)
+        drawTextInRect(bottomTextfield)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        // Keyboard stuff.
-        let center: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        center.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        keyboardInitialization(true)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        keyboardInitialization(false)
     }
     //MARK: Keyboard Methods
-    func keyboardWillShow(notification: NSNotification) {
-        if isEditingBottomFrame == true {
+    func keyboardInitialization(start : Bool) {
+        let center = NSNotificationCenter.defaultCenter()
+        if start == true {
+            center.addObserver(self,selector:#selector(EditorVC.keyboardDidShow(_:)),name:UIKeyboardDidShowNotification, object: nil)
+            center.addObserver(self,selector:#selector(EditorVC.keyboardWillHide(_:)),name:UIKeyboardWillHideNotification, object: nil)
+        } else {
+            center.removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+            center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        }
+     }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        if bottomTextfield.isFirstResponder() == true {
             UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.bottomTextfield.frame = self.topTextfield.frame
                 self.topTextfield.hidden = true
-            }, completion: nil)
+                }, completion:nil
+            )
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if isEditingBottomFrame == true {
+        if bottomTextfield.isFirstResponder() == true {
             UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 self.bottomTextfield.frame = self.bottomFrame
                 self.topTextfield.hidden = false
-            }, completion: nil)
+                }, completion: nil
+            )
         }
     }
     //MARK: TextField Methods
-    func textFieldDidBeginEditing(textField: UITextField) {
-        if textField == bottomTextfield {
-            isEditingBottomFrame = true
-        }else {
-            isEditingBottomFrame = false
-        }
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
@@ -88,19 +92,21 @@ class EditorVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         view.endEditing(true)
     }
     
-    @IBAction func cancelBttonPressed(sender: UIBarButtonItem) {
+    @IBAction func cancelButtonPressed(sender: UIBarButtonItem) {
         view.endEditing(true)
+        
+        if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
+            self.dismissViewControllerAnimated(true, completion: {});
+        }
     }
     
     @IBAction func cameraButtonPressed(sender: UIBarButtonItem) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-            imagePicker.allowsEditing = false
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+        imagePicker.allowsEditing = false
+        
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
    
     @IBAction func albumButtonPressed(sender: UIBarButtonItem) {
@@ -112,22 +118,31 @@ class EditorVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     
     @IBAction func shareButtonPressed(sender: UIBarButtonItem) {
+        if imageView.image == nil {
+            return
+        }
+        view.endEditing(true)
+        
         // Taking a screenshot of the imageView
         UIGraphicsBeginImageContextWithOptions(imageView.frame.size, true, 0.0);
         view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         var image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         // Cropping image
-        image = self.resizeImage(image, imageView: imageView)
+        image = resizeImage(image, imageView: imageView)
+        selectedMeme = MemeModel(topText:topTextfield.text!, bottomText:bottomTextfield.text!, originalImage:imageView.image!, memeImage: image)
         
-        let activityView = UIActivityViewController(activityItems:[image], applicationActivities: nil)
-        activityView.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeMail]
-        
+        let activityView = UIActivityViewController(activityItems:[selectedMeme.memeImage], applicationActivities: nil)
+        activityView.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeMail]
         presentationController?.dismissalTransitionDidEnd(false)
-        self.presentViewController(activityView, animated: true, completion: nil)
-        
-        // Saving Image
-        UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+        activityView.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                UIImageWriteToSavedPhotosAlbum(self.selectedMeme.memeImage, self, nil, nil)
+                (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(self.selectedMeme)
+                self.dismissViewControllerAnimated(true, completion: {});
+            }
+        }
+        presentViewController(activityView, animated: true, completion:nil)
     }
     //MARK: UIImagePickerController
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -162,12 +177,5 @@ class EditorVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         let attributeDictionary = [NSStrokeWidthAttributeName: -4.0, NSStrokeColorAttributeName : UIColor.blackColor(), NSForegroundColorAttributeName : UIColor.whiteColor()]
         textField.attributedText = NSAttributedString(string: (textField.text)!, attributes: attributeDictionary)
     }
-    
-    func replaceTextFieldFrames(){
-        let frame = bottomTextfield.frame
-        bottomTextfield.frame = topTextfield.frame
-        topTextfield.frame = frame
-    }
-    
 }
 

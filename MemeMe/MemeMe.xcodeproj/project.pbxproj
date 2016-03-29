@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3309D77D1CA7840C0091B730 /* SentMemesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D77C1CA7840C0091B730 /* SentMemesTVC.swift */; };
+		3309D77F1CA7841F0091B730 /* SentMemesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D77E1CA7841F0091B730 /* SentMemesCVC.swift */; };
+		3309D7811CA784700091B730 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309D7801CA784700091B730 /* DetailVC.swift */; };
 		333B38031C7E08970057D6E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B38021C7E08970057D6E9 /* AppDelegate.swift */; };
 		333B38051C7E08970057D6E9 /* EditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333B38041C7E08970057D6E9 /* EditorVC.swift */; };
 		333B38081C7E08970057D6E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333B38061C7E08970057D6E9 /* Main.storyboard */; };
 		333B380A1C7E08970057D6E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333B38091C7E08970057D6E9 /* Assets.xcassets */; };
 		333B380D1C7E08970057D6E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 333B380B1C7E08970057D6E9 /* LaunchScreen.storyboard */; };
+		3348D4221CA4F30B00D9C013 /* MemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348D4211CA4F30B00D9C013 /* MemeModel.swift */; };
+		336210781CAA1FB3001F6034 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336210771CAA1FB3001F6034 /* BaseVC.swift */; };
 		3377CED41C7E16AD0090D533 /* ufonts.com_impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3377CED31C7E16AD0090D533 /* ufonts.com_impact.ttf */; };
 		3377CED61C7E17170090D533 /* ufonts.com_impact.eot in Resources */ = {isa = PBXBuildFile; fileRef = 3377CED51C7E17170090D533 /* ufonts.com_impact.eot */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3309D77C1CA7840C0091B730 /* SentMemesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentMemesTVC.swift; sourceTree = "<group>"; };
+		3309D77E1CA7841F0091B730 /* SentMemesCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentMemesCVC.swift; sourceTree = "<group>"; };
+		3309D7801CA784700091B730 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		333B37FF1C7E08970057D6E9 /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		333B38021C7E08970057D6E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		333B38041C7E08970057D6E9 /* EditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorVC.swift; sourceTree = "<group>"; };
@@ -24,6 +32,8 @@
 		333B38091C7E08970057D6E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333B380C1C7E08970057D6E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		333B380E1C7E08970057D6E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3348D4211CA4F30B00D9C013 /* MemeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeModel.swift; sourceTree = "<group>"; };
+		336210771CAA1FB3001F6034 /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		3377CED31C7E16AD0090D533 /* ufonts.com_impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufonts.com_impact.ttf; sourceTree = "<group>"; };
 		3377CED51C7E17170090D533 /* ufonts.com_impact.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = ufonts.com_impact.eot; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,7 +69,12 @@
 			isa = PBXGroup;
 			children = (
 				333B38021C7E08970057D6E9 /* AppDelegate.swift */,
+				336210771CAA1FB3001F6034 /* BaseVC.swift */,
 				333B38041C7E08970057D6E9 /* EditorVC.swift */,
+				3309D77C1CA7840C0091B730 /* SentMemesTVC.swift */,
+				3309D77E1CA7841F0091B730 /* SentMemesCVC.swift */,
+				3309D7801CA784700091B730 /* DetailVC.swift */,
+				3348D4211CA4F30B00D9C013 /* MemeModel.swift */,
 				333B38061C7E08970057D6E9 /* Main.storyboard */,
 				333B38091C7E08970057D6E9 /* Assets.xcassets */,
 				3377CED31C7E16AD0090D533 /* ufonts.com_impact.ttf */,
@@ -143,8 +158,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3309D77D1CA7840C0091B730 /* SentMemesTVC.swift in Sources */,
 				333B38051C7E08970057D6E9 /* EditorVC.swift in Sources */,
+				3348D4221CA4F30B00D9C013 /* MemeModel.swift in Sources */,
+				3309D77F1CA7841F0091B730 /* SentMemesCVC.swift in Sources */,
 				333B38031C7E08970057D6E9 /* AppDelegate.swift in Sources */,
+				336210781CAA1FB3001F6034 /* BaseVC.swift in Sources */,
+				3309D7811CA784700091B730 /* DetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
