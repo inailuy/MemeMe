@@ -31,10 +31,6 @@ class SentMemesTVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(idCell)
         let imageView = cell!.contentView.viewWithTag(100) as! UIImageView

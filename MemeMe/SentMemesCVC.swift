@@ -12,11 +12,6 @@ class SentMemesCVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
@@ -28,10 +23,6 @@ class SentMemesCVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource
     //MARK: CollectionView Delegate/DataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
