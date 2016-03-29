@@ -33,13 +33,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="33K-wD-ivN"/>
                                     <barButtonItem tag="102" systemItem="camera" id="XRe-s6-Z8Q">
                                         <connections>
-                                            <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" id="oho-0p-3sn"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="ZLg-13-1VX"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="cCJ-AI-kK1"/>
                                     <barButtonItem tag="103" title="Album" id="Jeg-ls-UIc">
                                         <connections>
-                                            <action selector="albumButtonPressed:" destination="BYZ-38-t0r" id="w8z-Zv-KeF"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="szR-K7-bY1"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="jjh-QN-tZI"/>
@@ -158,7 +158,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextfield" destination="YjP-fB-Cxd" id="KTY-N4-Dff"/>
-                        <outlet property="cameraButton" destination="XRe-s6-Z8Q" id="cHB-9h-3Yo"/>
+                        <outlet property="cameraButton" destination="XRe-s6-Z8Q" id="Dn2-7Z-TG0"/>
                         <outlet property="imageView" destination="WxS-ch-fgs" id="ln0-oG-dae"/>
                         <outlet property="topTextfield" destination="QeG-62-waZ" id="wXN-x7-uWr"/>
                     </connections>

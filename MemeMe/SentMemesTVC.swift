@@ -42,7 +42,7 @@ class SentMemesTVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
         
         let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[indexPath.row]
         imageView.image = meme.memeImage
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit;
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
         label.text = meme.topText + " " + meme.bottomText
         
         return cell!

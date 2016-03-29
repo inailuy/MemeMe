@@ -96,26 +96,23 @@ class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         view.endEditing(true)
         
         if (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count > 0 {
-            self.dismissViewControllerAnimated(true, completion: {});
+            self.dismissViewControllerAnimated(true, completion: {})
         }
     }
     
-    @IBAction func cameraButtonPressed(sender: UIBarButtonItem) {
-        let imagePicker = UIImagePickerController()
+    @IBAction func barButtonPressed(sender: UIBarButtonItem) {
+        if cameraButton == sender {
+           imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        } else {
+            imagePicker.sourceType = .PhotoLibrary
+        }
+        
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
         imagePicker.allowsEditing = false
         
         presentViewController(imagePicker, animated: true, completion: nil)
     }
-   
-    @IBAction func albumButtonPressed(sender: UIBarButtonItem) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        imagePicker.delegate = self
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
-    }
+    
     
     @IBAction func shareButtonPressed(sender: UIBarButtonItem) {
         if imageView.image == nil {
@@ -124,10 +121,10 @@ class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         view.endEditing(true)
         
         // Taking a screenshot of the imageView
-        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, true, 0.0);
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, true, 0.0)
         view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         var image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         // Cropping image
         image = resizeImage(image, imageView: imageView)
         selectedMeme = MemeModel(topText:topTextfield.text!, bottomText:bottomTextfield.text!, originalImage:imageView.image!, memeImage: image)
@@ -139,7 +136,7 @@ class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
             if success {
                 UIImageWriteToSavedPhotosAlbum(self.selectedMeme.memeImage, self, nil, nil)
                 (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(self.selectedMeme)
-                self.dismissViewControllerAnimated(true, completion: {});
+                self.dismissViewControllerAnimated(true, completion: {})
             }
         }
         presentViewController(activityView, animated: true, completion:nil)
@@ -150,7 +147,7 @@ class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
             imageView.image = pickedImage
             imageView.hidden = false
             imageView.frame = view.frame
-            imageView.contentMode = UIViewContentMode.ScaleAspectFit;
+            imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -160,15 +157,15 @@ class EditorVC: BaseVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         var newImage = oldImage
         
         let itemSize = CGSizeMake(imageView.frame.width, imageView.frame.height)
-        UIGraphicsBeginImageContext(itemSize);
+        UIGraphicsBeginImageContext(itemSize)
         let statusBarSize = UIApplication.sharedApplication().statusBarFrame.size
         let y = imageView.frame.origin.y + Swift.min(statusBarSize.width, statusBarSize.height)
         
-        let imageRect = CGRectMake(0.0, -y, itemSize.width, itemSize.height + y);
+        let imageRect = CGRectMake(0.0, -y, itemSize.width, itemSize.height + y)
         oldImage.drawInRect(imageRect)
         
         newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         
         return newImage
     }

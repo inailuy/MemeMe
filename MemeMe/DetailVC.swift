@@ -16,7 +16,7 @@ class DetailVC: BaseVC {
         super.viewDidLoad()
         
         imageView.image = selectedMeme.memeImage
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit;
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
     
